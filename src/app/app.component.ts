@@ -1,6 +1,8 @@
 import { Component } from '@angular/core';
-
+import { TaskDialogResult } from './task-dialog/task-dialog.component';
+import { TaskDialogComponent } from './task-dialog/task-dialog.component';
 import { Task } from './task/task';
+import { MatDialog } from '@angular/material/dialog';
 import { CdkDrag, CdkDragDrop, CdkDropList, transferArrayItem} from '@angular/cdk/drag-drop';
 
 @Component({
@@ -33,6 +35,32 @@ export class AppComponent {
     },
   ];
   inProgress: Task[] = [];
+
+
+constructor(private dialog : MatDialog){}
+
+newTask() :void{
+  console.log("Bouton de creation appelle.");
+  
+  const dialogRef = this.dialog.open(TaskDialogComponent, {
+    width: '270px',
+    data: {
+      task: {},
+    },
+  });
+  // On s'abonne a l'evenement de fermeture de 
+  // la boite de dialogue, puis on ajout le resultat au tableau des taches a faires 
+  dialogRef
+    .afterClosed()
+    .subscribe((result: TaskDialogResult|undefined) => {
+      if (!result) {
+        return;
+      }
+      this.todo.push(result.task);
+    });
+}
+
+
 
 
   editTask(list: string, task: Task): void {}
