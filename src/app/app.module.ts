@@ -13,10 +13,13 @@ import { MatDialogModule } from '@angular/material/dialog';
 import { MatInputModule } from '@angular/material/input';
 import { FormsModule } from '@angular/forms';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { AngularFirestoreModule } from '@angular/fire/compat/firestore';
+import { environment } from 'src/environments/environment';
+import { AngularFireModule } from '@angular/fire/compat';
 
 @NgModule({
   declarations: [AppComponent, TaskComponent, TaskDialogComponent],
-  imports: [BrowserModule,MatToolbarModule,MatIconModule,MatCardModule,DragDropModule,MatButtonModule,MatInputModule,FormsModule,MatDialogModule, BrowserAnimationsModule],
+imports: [BrowserModule,MatToolbarModule,MatIconModule,MatCardModule,DragDropModule,MatButtonModule,MatInputModule,FormsModule,MatDialogModule, BrowserAnimationsModule,AngularFireModule.initializeApp(environment.firebase),AngularFirestoreModule],
   providers: [],
   bootstrap: [AppComponent]
 })
